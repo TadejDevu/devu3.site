@@ -58,8 +58,10 @@ p {
     position: fixed;
     top: 10px;     /* odmik od vrha */
     left: 10px;    /* odmik od leve */
-    width: 300px;  /* velikost slike */
+    width: 15vw;    /* % širine zaslona */
     height: auto;
+    max-width: 150px;  /* ne gre čez 150px */
+    min-width: 70px;   /* ne postane premajhna */
     z-index: 1000; /* da je vedno zgoraj */
 }
 </style>
