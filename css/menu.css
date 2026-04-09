@@ -207,8 +207,8 @@
 
   color: rgb(var(--neon-r), var(--neon-g), var(--neon-b));
   text-shadow:
-    0 0 4px  rgba(var(--neon-r), var(--neon-g), var(--neon-b), 0.55),
-    0 0 10px rgba(var(--neon-r), var(--neon-g), var(--neon-b), 0.45),
+    0 0 4px  rgba(var(--neon-r), var(--neon-g), var(--neon-b), 0.75),
+    0 0 10px rgba(var(--neon-r), var(--neon-g), var(--neon-b), 0.55),
     0 0 18px rgba(var(--neon-r), var(--neon-g), var(--neon-b), 0.35);
 
   transition: text-shadow 0.25s ease, color 0.25s ease;
@@ -229,6 +229,7 @@
   83%  { --neon-r: 120; --neon-g: 0;   --neon-b: 255; }  /* vijolična */
   100% { --neon-r: 255; --neon-g: 0;   --neon-b: 0;   }  /* nazaj rdeča */
 }
+
 /* ---------- Desktop layout: menu always visible ---------- */
 @media (min-width: 769px) {
   #hamburger,
