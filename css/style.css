@@ -96,6 +96,22 @@ body {
     align-items: center;
     transition: all var(--transition-speed) ease;
     border-left: 4px solid transparent;
+     appearance: none;
+     -webkit-appearance: none;
+     width: 100%;
+     text-align: left;
+     border: 0;
+     background: var(--color-bg, #222);
+     color: inherit;
+     cursor: pointer;
+     font: inherit;
+}
+
+
+/* odstrani default focus, nadomesti z lepšim */
+.menu-link:focus-visible {
+  outline: 2px solid var(--color-accent, #00bcd4);
+  outline-offset: 2px;
 }
 
 .menu-link:hover {
