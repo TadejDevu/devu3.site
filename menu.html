@@ -1,17 +1,18 @@
-﻿<div class="menu">
+name=menu.html url=https://github.com/TadejDevu/devu3.site/blob/main/menu.html
+<nav class="menu" role="navigation" aria-label="Glavni meni">
 
-    <div class="menu-link" data-page="home">Domov</div>
+    <a href="#home" class="menu-link" data-page="home" role="menuitem">🏠 Domov</a>
 
     <div class="menu-item" data-menu="about">
-        <div class="menu-link has-sub">O meni</div>
+        <button class="menu-link has-sub" role="menuitem" aria-haspopup="true" aria-expanded="false">ℹ️ O meni</button>
 
-        <div class="submenu">
-            <div class="menu-link" data-page="about_me">Kdo sem</div>
-            <div class="menu-link" data-page="about_work">Kaj delam</div>
+        <div class="submenu" role="menu">
+            <a href="#about_me" class="menu-link" data-page="about_me" role="menuitem">👤 Kdo sem</a>
+            <a href="#about_work" class="menu-link" data-page="about_work" role="menuitem">💼 Kaj delam</a>
         </div>
     </div>
 
-    <div class="menu-link" data-page="gallery">Galerija</div>
-    <div class="menu-link" data-page="contact">Kontakt</div>
+    <a href="#gallery" class="menu-link" data-page="gallery" role="menuitem">🖼️ Galerija</a>
+    <a href="#contact" class="menu-link" data-page="contact" role="menuitem">📧 Kontakt</a>
 
-</div>
+</nav>
