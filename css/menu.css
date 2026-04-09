@@ -150,19 +150,27 @@
 .menu-item.open > .menu-link.has-sub::after { transform: rotate(90deg); }
 
 /* ---------- Submenu (gap as well) ---------- */
+/* Submenu: privzeto zaprto – brez dodatnega razmaka */
 .submenu {
   display: flex;
   flex-direction: column;
   gap: var(--menu-gap);
 
   padding-left: 10px;
-  margin-top: var(--menu-gap);
+
+  /* KLJUČ: brez margin-top, ko je zaprto */
+  margin-top: 0;
 
   max-height: 0;
   overflow: hidden;
-  transition: max-height var(--t-med) ease;
+  transition: max-height var(--t-med) ease, margin-top var(--t-med) ease;
 }
-.menu-item.open .submenu { max-height: 500px; }
+
+/* Ko je odprto, dodaj razmak nad submenu (enak ostalim) */
+.menu-item.open .submenu {
+  margin-top: var(--menu-gap);
+  max-height: 500px;
+}
 
 /* ---------- Neon text ---------- */
 .neon-text {
