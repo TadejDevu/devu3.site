@@ -173,38 +173,64 @@
 }
 
 /* ---------- Neon text ---------- */
+/* 1) Privzeta barva teksta (brez neona) */
 .neon-text {
-  color: #eaffff; /* bela/hladna osnova */
-  text-shadow:
-    0 0 4px rgba(0, 188, 212, 0.55),
-    0 0 10px rgba(0, 188, 212, 0.45),
-    0 0 18px rgba(0, 188, 212, 0.35);
+  color: #ffffff;
+  text-shadow: none;
 }
 
-@keyframes neonPulseOnly {
-  0%, 100% {
-    text-shadow:
-      0 0 4px rgba(0, 188, 212, 0.55),
-      0 0 10px rgba(0, 188, 212, 0.45),
-      0 0 18px rgba(0, 188, 212, 0.35);
-  }
-  50% {
-    text-shadow:
-      0 0 6px rgba(0, 188, 212, 0.80),
-      0 0 14px rgba(0, 188, 212, 0.70),
-      0 0 26px rgba(0, 188, 212, 0.60);
-  }
-}
-
-@keyframes hueSpin {
-  from { filter: hue-rotate(0deg); }
-  to   { filter: hue-rotate(360deg); }
-}
-
+/* 2) HOVER: samo statičen glow (brez animation) */
 .menu-link:hover .neon-text {
-  animation:
-    neonPulseOnly 1.2s ease-in-out infinite,
-    hueSpin 2.8s linear infinite;
+  color: #ffffff;
+  text-shadow:
+    0 0 4px  rgba(0, 200, 255, 0.75),
+    0 0 10px rgba(0, 200, 255, 0.55),
+    0 0 18px rgba(0, 200, 255, 0.35);
+}
+
+/* 3) ACTIVE: pripravi border (barva pride iz custom property) */
+.menu-link.active {
+  border-left: 4px solid rgb(var(--active-r, 0), var(--active-g, 188), var(--active-b, 212));
+  padding-left: 8px; /* kompenzira border */
+}
+
+/* 4) ACTIVE: animiran mavrični glow + animirana border barva */
+.menu-link.active .neon-text {
+  animation: activeRainbow 2.6s linear infinite;
+}
+
+/* 5) ACTIVE: da border tudi animira, damo animacijo na gumb */
+.menu-link.active {
+  animation: activeBorderRainbow 2.6s linear infinite;
+}
+
+/* Animacija za tekst: spreminja RGB + text-shadow */
+@keyframes activeRainbow {
+  0%, 100% { --active-r: 255; --active-g: 0;   --active-b: 0; }   /* rdeča */
+  16%      { --active-r: 255; --active-g: 140; --active-b: 0; }   /* oranžna */
+  33%      { --active-r: 255; --active-g: 230; --active-b: 0; }   /* rumena */
+  50%      { --active-r: 0;   --active-g: 255; --active-b: 0; }   /* zelena */
+  66%      { --active-r: 0;   --active-g: 200; --active-b: 255; } /* cyan */
+  83%      { --active-r: 120; --active-g: 0;   --active-b: 255; } /* vijolična */
+}
+
+/* V tem keyframes samo “podpremo”, da gumb bere iste --active-* vrednosti */
+@keyframes activeBorderRainbow {
+  0%, 100% { --active-r: 255; --active-g: 0;   --active-b: 0; }
+  16%      { --active-r: 255; --active-g: 140; --active-b: 0; }
+  33%      { --active-r: 255; --active-g: 230; --active-b: 0; }
+  50%      { --active-r: 0;   --active-g: 255; --active-b: 0; }
+  66%      { --active-r: 0;   --active-g: 200; --active-b: 255; }
+  83%      { --active-r: 120; --active-g: 0;   --active-b: 255; }
+}
+
+/* Ko so --active-* nastavljeni, uporabimo jih za glow */
+.menu-link.active .neon-text {
+  color: rgb(var(--active-r), var(--active-g), var(--active-b));
+  text-shadow:
+    0 0 4px  rgba(var(--active-r), var(--active-g), var(--active-b), 0.85),
+    0 0 10px rgba(var(--active-r), var(--active-g), var(--active-b), 0.60),
+    0 0 18px rgba(var(--active-r), var(--active-g), var(--active-b), 0.40);
 }
 
 
