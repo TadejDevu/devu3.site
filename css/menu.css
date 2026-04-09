@@ -173,7 +173,7 @@
 }
 
 /* ---------- Neon text ---------- */
-/*.neon-text {
+.neon-text {
   transition: text-shadow 0.25s ease, color 0.25s ease;
 }
 
@@ -186,9 +186,9 @@
   }
   50% {
     text-shadow:
-      0 0 6px rgba(0, 188, 212, 0.80),
-      0 0 14px rgba(0, 188, 212, 0.70),
-      0 0 26px rgba(0, 188, 212, 0.60);
+      0 0 6px rgba(0, 188, 212, 0.99),
+      0 0 14px rgba(0, 188, 212, 0.90),
+      0 0 26px rgba(0, 188, 212, 0.80);
   }
 }
 
@@ -196,39 +196,9 @@
   color: #eaffff;
   animation: neonPulse 1.2s ease-in-out infinite;
 }
-*/
 
-/* Rainbow neon: animira barvo in glow */
-.neon-text {
-  /* privzete vrednosti, ki jih bo animacija spreminjala */
-  --neon-r: 0;
-  --neon-g: 188;
-  --neon-b: 212;
 
-  color: rgb(var(--neon-r), var(--neon-g), var(--neon-b));
-  text-shadow:
-    0 0 4px  rgba(var(--neon-r), var(--neon-g), var(--neon-b), 0.55),
-    0 0 10px rgba(var(--neon-r), var(--neon-g), var(--neon-b), 0.45),
-    0 0 18px rgba(var(--neon-r), var(--neon-g), var(--neon-b), 0.35);
 
-  transition: text-shadow 0.25s ease, color 0.25s ease;
-}
-
-/* ko hoveraš gumb, naj se začne mavrica */
-.menu-link:hover .neon-text {
-  animation: rainbowNeon 1.2s linear infinite;
-}
-
-/* ključ: animiramo RGB vrednosti */
-@keyframes rainbowNeon {
-  0%   { --neon-r: 255; --neon-g: 0;   --neon-b: 0;   }  /* rdeča */
-  16%  { --neon-r: 255; --neon-g: 140; --neon-b: 0;   }  /* oranžna */
-  33%  { --neon-r: 255; --neon-g: 230; --neon-b: 0;   }  /* rumena */
-  50%  { --neon-r: 0;   --neon-g: 255; --neon-b: 0;   }  /* zelena */
-  66%  { --neon-r: 0;   --neon-g: 200; --neon-b: 255; }  /* cyan */
-  83%  { --neon-r: 120; --neon-g: 0;   --neon-b: 255; }  /* vijolična */
-  100% { --neon-r: 255; --neon-g: 0;   --neon-b: 0;   }  /* nazaj rdeča */
-}
 
 /* ---------- Desktop layout: menu always visible ---------- */
 @media (min-width: 769px) {
