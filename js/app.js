@@ -73,8 +73,9 @@ document.addEventListener("click", (e) => {
     if (!link) return;
 
     if (link.classList.contains("has-sub")) {
-        link.parentElement.classList.toggle("open");
-        link.setAttribute("aria-expanded", link.parentElement.classList.contains("open"));
+        const parent = link.parentElement;
+        parent.classList.toggle("open");
+        link.setAttribute("aria-expanded", parent.classList.contains("open") ? "true" : "false");
         return;
     }
 
