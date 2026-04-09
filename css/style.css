@@ -1,59 +1,273 @@
-/* Base Styles */
+/* ========================
+   CSS VARIABLES & RESET
+   ======================== */
+:root {
+    --color-dark: #111;
+    --color-dark-secondary: #1a1a1a;
+    --color-bg: #222;
+    --color-bg-hover: #333;
+    --color-bg-active: #444;
+    --color-text: #fff;
+    --color-accent: #00bcd4;
+    --transition-speed: 0.3s;
+}
+
+* {
+    box-sizing: border-box;
+}
+
 body {
     margin: 0;
     font-family: Arial, sans-serif;
-}
-
-/* Layout Styles */
-.header {
-    background: #f1f1f1;
-    padding: 10px;
-    text-align: center;
-}
-
-.header__title {
-    font-size: 24px;
-    color: #333;
-}
-
-.nav {
     display: flex;
-    justify-content: center;
-    padding: 10px 0;
+    background: var(--color-dark-secondary);
+    color: var(--color-text);
 }
 
-.nav__item {
-    margin: 0 15px;
+/* ========================
+   HAMBURGER BUTTON
+   ======================== */
+#hamburger {
+    display: block;
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    z-index: 1000;
+    font-size: 26px;
+    padding: 10px;
+    background: var(--color-dark);
+    color: var(--color-text);
+    border: none;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: all var(--transition-speed) ease;
 }
 
-.nav__link {
-    text-decoration: none;
-    color: #007BFF;
+#hamburger:hover {
+    background: var(--color-bg-hover);
 }
 
-/* Main Content */
-.main {
-    padding: 20px;
+/* ========================
+   MENU - SIDE NAVIGATION
+   ======================== */
+#menu {
+    width: 220px;
+    background: var(--color-dark);
+    color: var(--color-text);
+    min-height: 100vh;
+    padding: 10px;
+    position: fixed;
+    top: 60px;
+    left: 0;
+    transform: translateX(-100%);
+    transition: transform var(--transition-speed) ease;
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.5);
+    overflow-y: auto;
+    z-index: 999;
 }
 
-.main__section {
-    margin-bottom: 20px;
+#menu.open {
+    transform: translateX(0);
 }
 
-.section__title {
-    font-size: 20px;
-    color: #555;
+/* Menu Label (Text above hamburger) */
+#BurgerTxt {
+    position: fixed;
+    top: 15px;
+    left: 35px;
+    padding: 15px;
+    z-index: 1000;
+    cursor: pointer;
+    font-size: 14px;
+    color: var(--color-text);
 }
 
-/* Media Queries */
-@media (max-width: 768px) {
-    .nav {
-        flex-direction: column;
+/* ========================
+   MENU ITEMS & LINKS
+   ======================== */
+.menu-link {
+    cursor: pointer;
+    padding: 10px;
+    margin: 4px 0;
+    background: var(--color-bg);
+    border-radius: 6px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: all var(--transition-speed) ease;
+    border-left: 4px solid transparent;
+}
+
+.menu-link:hover {
+    background: var(--color-bg-hover);
+    transform: translateX(4px);
+}
+
+.menu-link.active {
+    background: var(--color-bg-active);
+    color: var(--color-text);
+    font-weight: bold;
+    border-left: 4px solid var(--color-accent);
+}
+
+.menu-link.active:hover {
+    transform: none;
+}
+
+/* Menu Item Container */
+.menu-item {
+    margin-bottom: 5px;
+}
+
+/* Submenu Styles */
+.submenu {
+    max-height: 0;
+    overflow: hidden;
+    padding-left: 10px;
+    transition: max-height var(--transition-speed) ease;
+}
+
+.menu-item.open .submenu {
+    max-height: 300px;
+}
+
+/* Arrow Indicator */
+.menu-link.has-sub::after {
+    content: "▶";
+    font-size: 10px;
+    transition: transform var(--transition-speed) ease;
+}
+
+.menu-item.open > .menu-link.has-sub::after {
+    transform: rotate(90deg);
+}
+
+/* ========================
+   MAIN CONTENT AREA
+   ======================== */
+#content {
+    flex: 1;
+    padding: 80px 20px 20px 20px;
+    background: var(--color-dark-secondary);
+    color: var(--color-text);
+    transition: opacity 0.2s ease;
+    margin-left: 0;
+}
+
+#content h2 {
+    color: var(--color-accent);
+    margin-top: 0;
+}
+
+/* ========================
+   DESKTOP LAYOUT (≥768px)
+   ======================== */
+@media (min-width: 769px) {
+    #hamburger {
+        display: none;
+    }
+
+    #BurgerTxt {
+        display: none;
+    }
+
+    #menu {
+        position: static;
+        transform: translateX(0);
+        top: auto;
+        box-shadow: none;
+        border-right: 1px solid var(--color-bg);
+        width: 220px;
+        min-height: 100vh;
+    }
+
+    #content {
+        padding: 20px;
+        margin-left: 0;
+        flex: 1;
+    }
+
+    body {
+        flex-direction: row;
     }
 }
 
+/* ========================
+   TABLET LAYOUT (481px - 768px)
+   ======================== */
+@media (max-width: 768px) and (min-width: 481px) {
+    #hamburger {
+        display: block;
+        font-size: 24px;
+    }
+
+    #content {
+        padding: 80px 15px 20px 15px;
+    }
+
+    .menu-link {
+        padding: 12px;
+        font-size: 15px;
+    }
+}
+
+/* ========================
+   MOBILE LAYOUT (≤480px)
+   ======================== */
 @media (max-width: 480px) {
-    .header__title {
+    #hamburger {
+        display: block;
+        font-size: 22px;
+        padding: 8px;
+    }
+
+    #BurgerTxt {
+        font-size: 12px;
+        top: 12px;
+        left: 32px;
+        padding: 12px;
+    }
+
+    #menu {
+        width: 200px;
+        top: 50px;
+    }
+
+    #content {
+        padding: 70px 15px 20px 15px;
+        font-size: 14px;
+    }
+
+    .menu-link {
+        padding: 8px;
+        font-size: 14px;
+        margin: 3px 0;
+    }
+
+    .menu-link.has-sub::after {
+        font-size: 9px;
+    }
+
+    #content h2 {
         font-size: 20px;
+    }
+
+    #content h3 {
+        font-size: 16px;
+    }
+}
+
+/* ========================
+   PRINT STYLES
+   ======================== */
+@media print {
+    #hamburger,
+    #BurgerTxt,
+    #menu {
+        display: none;
+    }
+
+    #content {
+        padding: 20px;
     }
 }
