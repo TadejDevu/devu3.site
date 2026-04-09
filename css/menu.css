@@ -216,7 +216,7 @@
 
 /* ko hoveraš gumb, naj se začne mavrica */
 .menu-link:hover .neon-text {
-  animation: rainbowNeon 2.2s linear infinite;
+  animation: rainbowNeon 1.2s linear infinite;
 }
 
 /* ključ: animiramo RGB vrednosti */
