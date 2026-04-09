@@ -172,7 +172,8 @@
   max-height: 500px;
 }
 
-/* ---------- Neon text ---------- */
+/*###################################### */
+/*############ Neon text ############### */
 /* 1) Privzeta barva teksta (brez neona) */
 .neon-text {
   color: #ffffff;
@@ -233,6 +234,7 @@
     0 0 18px rgba(var(--active-r), var(--active-g), var(--active-b), 0.40);
 }
 
+.menu-link.active:hover { transform: none; }
 
 
 
