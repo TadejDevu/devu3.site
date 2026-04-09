@@ -1,289 +1,341 @@
-/* ========================
-   CSS VARIABLES & RESET
-   ======================== */
+/* ===========================
+   DeVu - style.css (clean)
+   - enoten izgled gumbov v meniju (tudi submenu)
+   - responsive (mobile: burger + slide menu, desktop: stalni menu)
+   - neon-text animacija na hover
+   =========================== */
+
+/* ---- Variables ---- */
 :root {
-    --color-dark: #111;
-    --color-dark-secondary: #1a1a1a;
-    --color-bg: #222;
-    --color-bg-hover: #333;
-    --color-bg-active: #444;
-    --color-text: #fff;
-    --color-accent: #00bcd4;
-    --transition-speed: 0.3s;
+  --color-dark: #111;
+  --color-dark-2: #1a1a1a;
+  --color-panel: #222;
+  --color-panel-hover: #333;
+  --color-panel-active: #444;
+
+  --color-text: #fff;
+  --color-muted: #c9c9c9;
+
+  --color-accent: #00bcd4;
+
+  --menu-width: 220px;
+  --header-height: 60px;
+
+  --radius: 6px;
+  --shadow: 2px 0 10px rgba(0, 0, 0, 0.5);
+
+  --t-fast: 0.2s;
+  --t-med: 0.3s;
+
+  --touch-min: 44px;
 }
 
-* {
-    box-sizing: border-box;
-}
+/* ---- Reset / base ---- */
+* { box-sizing: border-box; }
+
+html, body { height: 100%; }
 
 body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-    display: flex;
-    background: var(--color-dark-secondary);
-    color: var(--color-text);
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: var(--color-dark-2);
+  color: var(--color-text);
 }
 
-/* ========================
-   HAMBURGER BUTTON
-   ======================== */
+/* Optional: nicer text rendering */
+body, button {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ===========================
+   Burger (mobile)
+   =========================== */
 #hamburger {
-    display: block;
-    position: fixed;
-    top: 10px;
-    left: 10px;
-    z-index: 1000;
-    font-size: 26px;
-    padding: 10px;
-    background: var(--color-dark);
-    color: var(--color-text);
-    border: none;
-    cursor: pointer;
-    border-radius: 4px;
-    transition: all var(--transition-speed) ease;
+  display: block;
+  position: fixed;
+  top: 10px;
+  left: 10px;
+  z-index: 1000;
+
+  width: 44px;
+  height: 44px;
+
+  border: 0;
+  border-radius: 4px;
+
+  background: var(--color-dark);
+  color: var(--color-text);
+
+  font-size: 22px;
+  line-height: 1;
+
+  cursor: pointer;
+  transition: background var(--t-fast) ease;
 }
 
-#hamburger:hover {
-    background: var(--color-bg-hover);
-}
+#hamburger:hover { background: var(--color-panel-hover); }
 
-/* ========================
-   MENU - SIDE NAVIGATION
-   ======================== */
-#menu {
-    width: 220px;
-    background: var(--color-dark);
-    color: var(--color-text);
-    min-height: 100vh;
-    padding: 10px;
-    position: fixed;
-    top: 60px;
-    left: 0;
-    transform: translateX(-100%);
-    transition: transform var(--transition-speed) ease;
-    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.5);
-    overflow-y: auto;
-    z-index: 999;
-}
-
-#menu.open {
-    transform: translateX(0);
-}
-
-/* Menu Label (Text above hamburger) */
 #BurgerTxt {
-    position: fixed;
-    top: 15px;
-    left: 35px;
-    padding: 15px;
-    z-index: 1000;
-    cursor: pointer;
-    font-size: 14px;
-    color: var(--color-text);
+  position: fixed;
+  top: 14px;
+  left: 58px;
+  z-index: 1000;
+
+  padding: 12px 10px;
+
+  font-size: 14px;
+  color: var(--color-muted);
+
+  cursor: pointer;
+  user-select: none;
 }
 
-/* ========================
-   MENU ITEMS & LINKS
-   ======================== */
+/* ===========================
+   Menu container
+   =========================== */
+#menu {
+  position: fixed;
+  top: var(--header-height);
+  left: 0;
+  z-index: 999;
+
+  width: var(--menu-width);
+  min-height: calc(100vh - var(--header-height));
+
+  padding: 10px;
+
+  background: var(--color-dark);
+  box-shadow: var(--shadow);
+
+  transform: translateX(-110%);
+  transition: transform var(--t-med) ease;
+
+  overflow-y: auto;
+}
+
+#menu.open { transform: translateX(0); }
+
+/* menu wrapper inside menu.html */
+.menu { display: block; }
+
+/* ===========================
+   Menu items (buttons)
+   =========================== */
+.menu-item { margin-bottom: 5px; }
+
+/* ENOTEN IZGLED GUMBOV */
 .menu-link {
-    cursor: pointer;
-    padding: 10px;
-    margin: 4px 0;
-    background: var(--color-bg);
-    border-radius: 6px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    transition: all var(--transition-speed) ease;
-    border-left: 4px solid transparent;
-     appearance: none;
-     -webkit-appearance: none;
-     width: 100%;
-     text-align: left;
-     border: 0;
-     background: var(--color-bg, #222);
-     color: inherit;
-     cursor: pointer;
-     font: inherit;
+  appearance: none;
+  -webkit-appearance: none;
+
+  width: 100%;
+  text-align: left;
+
+  min-height: var(--touch-min);
+  padding: 10px 12px;
+  margin: 4px 0;
+
+  border: 0;
+  border-radius: var(--radius);
+  background: var(--color-panel);
+  color: inherit;
+  font: inherit;
+  line-height: 1.2;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  cursor: pointer;
+  user-select: none;
+
+  transition:
+    background var(--t-fast) ease,
+    transform var(--t-fast) ease,
+    border-color var(--t-fast) ease;
 }
 
+/* Hover */
+.menu-link:hover {
+  background: var(--color-panel-hover);
+  transform: translateX(4px);
+}
 
-/* odstrani default focus, nadomesti z lepšim */
+/* Active */
+.menu-link.active {
+  background: var(--color-panel-active);
+  font-weight: 700;
+  border-left: 4px solid var(--color-accent);
+  padding-left: 8px; /* kompenzira border-left */
+}
+
+.menu-link.active:hover { transform: none; }
+
+/* Focus (tipkovnica) */
 .menu-link:focus-visible {
-  outline: 2px solid var(--color-accent, #00bcd4);
+  outline: 2px solid var(--color-accent);
   outline-offset: 2px;
 }
 
-.menu-link:hover {
-    background: var(--color-bg-hover);
-    transform: translateX(4px);
-}
-
-.menu-link.active {
-    background: var(--color-bg-active);
-    color: var(--color-text);
-    font-weight: bold;
-    border-left: 4px solid var(--color-accent);
-}
-
-.menu-link.active:hover {
-    transform: none;
-}
-
-/* Menu Item Container */
-.menu-item {
-    margin-bottom: 5px;
-}
-
-/* Submenu Styles */
+/* Submenu container */
 .submenu {
-    max-height: 0;
-    overflow: hidden;
-    padding-left: 10px;
-    transition: max-height var(--transition-speed) ease;
+  max-height: 0;
+  overflow: hidden;
+
+  padding-left: 10px;
+  margin-top: 4px;
+
+  transition: max-height var(--t-med) ease;
 }
 
-.menu-item.open .submenu {
-    max-height: 300px;
-}
+.menu-item.open .submenu { max-height: 400px; }
 
-/* Arrow Indicator */
+/* pomembno: submenu gumbi naj imajo isti margin */
+.submenu .menu-link { margin: 4px 0; }
+
+/* Arrow for has-sub */
 .menu-link.has-sub::after {
-    content: "▶";
-    font-size: 10px;
-    transition: transform var(--transition-speed) ease;
+  content: "▶";
+  font-size: 10px;
+  opacity: 0.9;
+  transition: transform var(--t-med) ease;
 }
 
-.menu-item.open > .menu-link.has-sub::after {
-    transform: rotate(90deg);
+.menu-item.open > .menu-link.has-sub::after { transform: rotate(90deg); }
+
+/* ===========================
+   Neon text
+   Uporaba: <span class="neon-text">Tekst</span> znotraj gumba
+   =========================== */
+.neon-text {
+  transition: text-shadow 0.25s ease, color 0.25s ease;
 }
 
-/* ========================
-   MAIN CONTENT AREA
-   ======================== */
+@keyframes neonPulse {
+  0%, 100% {
+    text-shadow:
+      0 0 4px rgba(0, 188, 212, 0.55),
+      0 0 10px rgba(0, 188, 212, 0.45),
+      0 0 18px rgba(0, 188, 212, 0.35);
+  }
+  50% {
+    text-shadow:
+      0 0 6px rgba(0, 188, 212, 0.80),
+      0 0 14px rgba(0, 188, 212, 0.70),
+      0 0 26px rgba(0, 188, 212, 0.60);
+  }
+}
+
+.menu-link:hover .neon-text {
+  color: #eaffff;
+  animation: neonPulse 1.2s ease-in-out infinite;
+}
+
+/* Če ne želiš animacije, samo neon, zamenjaj zgoraj z:
+.menu-link:hover .neon-text {
+  color: #eaffff;
+  text-shadow: 0 0 6px rgba(0,188,212,.75), 0 0 14px rgba(0,188,212,.6);
+}
+*/
+
+/* ===========================
+   Content area
+   =========================== */
 #content {
-    flex: 1;
-    padding: 80px 20px 20px 20px;
-    background: var(--color-dark-secondary);
-    color: var(--color-text);
-    transition: opacity 0.2s ease;
-    margin-left: 0;
+  min-height: 100vh;
+  padding: calc(var(--header-height) + 20px) 20px 20px 20px;
+  background: var(--color-dark-2);
+  color: var(--color-text);
+  transition: opacity var(--t-fast) ease;
 }
 
-#content h2 {
-    color: var(--color-accent);
-    margin-top: 0;
-}
+/* Typography defaults */
+#content h1, #content h2, #content h3 { margin-top: 0; }
+#content p { color: var(--color-muted); }
 
-/* ========================
-   DESKTOP LAYOUT (≥768px)
-   ======================== */
+/* ===========================
+   Desktop layout
+   - menu always visible
+   =========================== */
 @media (min-width: 769px) {
-    #hamburger {
-        display: none;
-    }
+  #hamburger,
+  #BurgerTxt {
+    display: none;
+  }
 
-    #BurgerTxt {
-        display: none;
-    }
+  body {
+    display: flex;
+    flex-direction: row;
+  }
 
-    #menu {
-        position: static;
-        transform: translateX(0);
-        top: auto;
-        box-shadow: none;
-        border-right: 1px solid var(--color-bg);
-        width: 220px;
-        min-height: 100vh;
-    }
+  /* menu becomes a normal left column */
+  #menu {
+    position: sticky;
+    top: 0;
 
-    #content {
-        padding: 20px;
-        margin-left: 0;
-        flex: 1;
-    }
+    transform: none;
+    box-shadow: none;
 
-    body {
-        flex-direction: row;
-    }
+    height: 100vh;
+    min-height: 100vh;
+
+    width: var(--menu-width);
+    border-right: 1px solid var(--color-panel);
+
+    padding-top: 20px;
+  }
+
+  #content {
+    flex: 1;
+    padding: 20px;
+  }
 }
 
-/* ========================
-   TABLET LAYOUT (481px - 768px)
-   ======================== */
+/* ===========================
+   Tablet tweaks
+   =========================== */
 @media (max-width: 768px) and (min-width: 481px) {
-    #hamburger {
-        display: block;
-        font-size: 24px;
-    }
-
-    #content {
-        padding: 80px 15px 20px 15px;
-    }
-
-    .menu-link {
-        padding: 12px;
-        font-size: 15px;
-    }
+  :root { --menu-width: 230px; }
+  #content { padding: calc(var(--header-height) + 16px) 16px 16px; }
 }
 
-/* ========================
-   MOBILE LAYOUT (≤480px)
-   ======================== */
+/* ===========================
+   Mobile tweaks
+   =========================== */
 @media (max-width: 480px) {
-    #hamburger {
-        display: block;
-        font-size: 22px;
-        padding: 8px;
-    }
+  :root { --menu-width: 200px; }
 
-    #BurgerTxt {
-        font-size: 12px;
-        top: 12px;
-        left: 32px;
-        padding: 12px;
-    }
+  #hamburger {
+    top: 8px;
+    left: 8px;
+    width: 40px;
+    height: 40px;
+    font-size: 20px;
+  }
 
-    #menu {
-        width: 200px;
-        top: 50px;
-    }
+  #BurgerTxt {
+    top: 11px;
+    left: 50px;
+    padding: 10px 8px;
+    font-size: 12px;
+  }
 
-    #content {
-        padding: 70px 15px 20px 15px;
-        font-size: 14px;
-    }
+  #menu {
+    top: 52px;
+    min-height: calc(100vh - 52px);
+  }
 
-    .menu-link {
-        padding: 8px;
-        font-size: 14px;
-        margin: 3px 0;
-    }
-
-    .menu-link.has-sub::after {
-        font-size: 9px;
-    }
-
-    #content h2 {
-        font-size: 20px;
-    }
-
-    #content h3 {
-        font-size: 16px;
-    }
+  #content {
+    padding: 72px 14px 14px;
+    font-size: 14px;
+  }
 }
 
-/* ========================
-   PRINT STYLES
-   ======================== */
+/* ===========================
+   Print
+   =========================== */
 @media print {
-    #hamburger,
-    #BurgerTxt,
-    #menu {
-        display: none;
-    }
-
-    #content {
-        padding: 20px;
-    }
+  #menu, #hamburger, #BurgerTxt { display: none !important; }
+  #content { padding: 20px !important; color: #000; background: #fff; }
 }
