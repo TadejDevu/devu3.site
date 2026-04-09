@@ -174,39 +174,37 @@
 
 /* ---------- Neon text ---------- */
 .neon-text {
-  transition: text-shadow 0.25s ease, color 0.25s ease;
+  color: #eaffff; /* bela/hladna osnova */
+  text-shadow:
+    0 0 4px rgba(0, 188, 212, 0.55),
+    0 0 10px rgba(0, 188, 212, 0.45),
+    0 0 18px rgba(0, 188, 212, 0.35);
 }
 
-@keyframes neonPulse {
+@keyframes neonPulseOnly {
   0%, 100% {
     text-shadow:
-      0 0 4px rgba(0, 0, 255, 0.99),
-      0 0 10px rgba(0, 0, 255, 0.90),
-      0 0 18px rgba(0, 0, 255, 0.80);
-  }
-  25% {
-    text-shadow:
-      0 0 6px rgba(0, 128, 128, 0.99),
-      0 0 14px rgba(0, 128, 128, 0.90),
-      0 0 26px rgba(0, 128, 128, 0.80);
+      0 0 4px rgba(0, 188, 212, 0.55),
+      0 0 10px rgba(0, 188, 212, 0.45),
+      0 0 18px rgba(0, 188, 212, 0.35);
   }
   50% {
     text-shadow:
-      0 0 6px rgba(128, 128, 128, 0.99),
-      0 0 14px rgba(128, 128, 128, 0.90),
-      0 0 26px rgba(128, 128, 128, 0.80);
-  }
-  75% {
-    text-shadow:
-      0 0 6px rgba(188, 0, 212, 0.99),
-      0 0 14px rgba(188, 0, 212, 0.90),
-      0 0 26px rgba(188, 0, 212, 0.80);
+      0 0 6px rgba(0, 188, 212, 0.80),
+      0 0 14px rgba(0, 188, 212, 0.70),
+      0 0 26px rgba(0, 188, 212, 0.60);
   }
 }
 
+@keyframes hueSpin {
+  from { filter: hue-rotate(0deg); }
+  to   { filter: hue-rotate(360deg); }
+}
+
 .menu-link:hover .neon-text {
-  color: #eaffff;
-  animation: neonPulse 1.2s ease-in-out infinite;
+  animation:
+    neonPulseOnly 1.2s ease-in-out infinite,
+    hueSpin 2.8s linear infinite;
 }
 
 
