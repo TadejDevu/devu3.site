@@ -1,4 +1,3 @@
-name=js/app.js url=https://github.com/TadejDevu/devu3.site/blob/main/js/app.js
 /**
  * DeVu Portfolio - Glavna Aplikacija
  * Dinamično nalaganje strani in upravljanje navigacije
