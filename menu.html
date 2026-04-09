@@ -1,17 +1,19 @@
-<nav class="menu" role="navigation" aria-label="Glavni meni">
+<div class="menu" role="navigation" aria-label="Glavni meni">
 
-    <a href="#home" class="menu-link" data-page="home" role="menuitem">🏠 Domov</a>
+  <button type="button" class="menu-link" data-page="home">Domov</button>
 
-    <div class="menu-item" data-menu="about">
-        <button class="menu-link has-sub" role="menuitem" aria-haspopup="true" aria-expanded="false">ℹ️ O meni</button>
+  <div class="menu-item">
+    <button type="button" class="menu-link has-sub" aria-expanded="false">
+      O meni
+    </button>
 
-        <div class="submenu" role="menu">
-            <a href="#about_me" class="menu-link" data-page="about_me" role="menuitem">👤 Kdo sem</a>
-            <a href="#about_work" class="menu-link" data-page="about_work" role="menuitem">💼 Kaj delam</a>
-        </div>
+    <div class="submenu" role="group" aria-label="O meni">
+      <button type="button" class="menu-link" data-page="about_me">Kdo sem</button>
+      <button type="button" class="menu-link" data-page="about_work">Kaj delam</button>
     </div>
+  </div>
 
-    <a href="#gallery" class="menu-link" data-page="gallery" role="menuitem">🖼️ Galerija</a>
-    <a href="#contact" class="menu-link" data-page="contact" role="menuitem">📧 Kontakt</a>
+  <button type="button" class="menu-link" data-page="gallery">Galerija</button>
+  <button type="button" class="menu-link" data-page="contact">Kontakt</button>
 
-</nav>
+</div>
