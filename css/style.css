@@ -1,14 +1,15 @@
 /* ===========================
-   DeVu - style.css (clean)
-   - enoten izgled gumbov v meniju (tudi submenu)
-   - responsive (mobile: burger + slide menu, desktop: stalni menu)
-   - neon-text animacija na hover
+   DeVu - style.css (fixed + consistent spacing)
+   - Enaki vertikalni razmaki (gap)
+   - Menu: mobile slide-in, desktop fixed column
+   - Neon hover na .neon-text
    =========================== */
 
 /* ---- Variables ---- */
 :root {
   --color-dark: #111;
   --color-dark-2: #1a1a1a;
+
   --color-panel: #222;
   --color-panel-hover: #333;
   --color-panel-active: #444;
@@ -28,11 +29,13 @@
   --t-med: 0.3s;
 
   --touch-min: 44px;
+
+  /* KEY: enoten vertikalni razmak povsod */
+  --menu-gap: 10px;
 }
 
 /* ---- Reset / base ---- */
 * { box-sizing: border-box; }
-
 html, body { height: 100%; }
 
 body {
@@ -42,11 +45,7 @@ body {
   color: var(--color-text);
 }
 
-/* Optional: nicer text rendering */
-body, button {
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
+button { font: inherit; color: inherit; }
 
 /* ===========================
    Burger (mobile)
@@ -92,7 +91,7 @@ body, button {
 }
 
 /* ===========================
-   Menu container
+   Menu container (mobile slide)
    =========================== */
 #menu {
   position: fixed;
@@ -116,15 +115,21 @@ body, button {
 
 #menu.open { transform: translateX(0); }
 
-/* menu wrapper inside menu.html */
-.menu { display: block; }
+/* ===========================
+   Menu layout (IMPORTANT: gap fixes spacing)
+   =========================== */
+.menu {
+  display: flex;
+  flex-direction: column;
+  gap: var(--menu-gap);
+}
+
+/* menu-item: brez extra margin/padding, da gap kontrolira spacing */
+.menu-item { margin: 0; padding: 0; }
 
 /* ===========================
-   Menu items (buttons)
+   Menu buttons
    =========================== */
-.menu-item { margin-bottom: 5px; }
-
-/* ENOTEN IZGLED GUMBOV */
 .menu-link {
   appearance: none;
   -webkit-appearance: none;
@@ -134,13 +139,15 @@ body, button {
 
   min-height: var(--touch-min);
   padding: 10px 12px;
-  margin: 4px 0;
+
+  /* KEY: margin 0, spacing comes from gap */
+  margin: 0;
 
   border: 0;
   border-radius: var(--radius);
   background: var(--color-panel);
   color: inherit;
-  font: inherit;
+
   line-height: 1.2;
 
   display: flex;
@@ -150,19 +157,14 @@ body, button {
   cursor: pointer;
   user-select: none;
 
-  transition:
-    background var(--t-fast) ease,
-    transform var(--t-fast) ease,
-    border-color var(--t-fast) ease;
+  transition: background var(--t-fast) ease, transform var(--t-fast) ease;
 }
 
-/* Hover */
 .menu-link:hover {
   background: var(--color-panel-hover);
   transform: translateX(4px);
 }
 
-/* Active */
 .menu-link.active {
   background: var(--color-panel-active);
   font-weight: 700;
@@ -172,27 +174,10 @@ body, button {
 
 .menu-link.active:hover { transform: none; }
 
-/* Focus (tipkovnica) */
 .menu-link:focus-visible {
   outline: 2px solid var(--color-accent);
   outline-offset: 2px;
 }
-
-/* Submenu container */
-.submenu {
-  max-height: 0;
-  overflow: hidden;
-
-  padding-left: 10px;
-  margin-top: 4px;
-
-  transition: max-height var(--t-med) ease;
-}
-
-.menu-item.open .submenu { max-height: 400px; }
-
-/* pomembno: submenu gumbi naj imajo isti margin */
-.submenu .menu-link { margin: 4px 0; }
 
 /* Arrow for has-sub */
 .menu-link.has-sub::after {
@@ -205,8 +190,37 @@ body, button {
 .menu-item.open > .menu-link.has-sub::after { transform: rotate(90deg); }
 
 /* ===========================
-   Neon text
-   Uporaba: <span class="neon-text">Tekst</span> znotraj gumba
+   Submenu (also uses gap)
+   =========================== */
+.submenu {
+  /* KEY: avoid margin collapsing issues by using flex + gap */
+  display: flex;
+  flex-direction: column;
+  gap: var(--menu-gap);
+
+  /* indent */
+  padding-left: 10px;
+
+  /* spacing between parent item and first child:
+     keep it equal to other gaps */
+  margin-top: var(--menu-gap);
+
+  /* open/close animation */
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height var(--t-med) ease;
+}
+
+/* no margins on submenu items */
+.submenu .menu-link { margin: 0; }
+
+.menu-item.open .submenu {
+  /* big enough for most content; can increase if needed */
+  max-height: 500px;
+}
+
+/* ===========================
+   Neon text (wrap label in span.neon-text)
    =========================== */
 .neon-text {
   transition: text-shadow 0.25s ease, color 0.25s ease;
@@ -232,15 +246,8 @@ body, button {
   animation: neonPulse 1.2s ease-in-out infinite;
 }
 
-/* Če ne želiš animacije, samo neon, zamenjaj zgoraj z:
-.menu-link:hover .neon-text {
-  color: #eaffff;
-  text-shadow: 0 0 6px rgba(0,188,212,.75), 0 0 14px rgba(0,188,212,.6);
-}
-*/
-
 /* ===========================
-   Content area
+   Content
    =========================== */
 #content {
   min-height: 100vh;
@@ -250,13 +257,11 @@ body, button {
   transition: opacity var(--t-fast) ease;
 }
 
-/* Typography defaults */
 #content h1, #content h2, #content h3 { margin-top: 0; }
 #content p { color: var(--color-muted); }
 
 /* ===========================
-   Desktop layout
-   - menu always visible
+   Desktop layout (menu always visible)
    =========================== */
 @media (min-width: 769px) {
   #hamburger,
@@ -269,7 +274,6 @@ body, button {
     flex-direction: row;
   }
 
-  /* menu becomes a normal left column */
   #menu {
     position: sticky;
     top: 0;
