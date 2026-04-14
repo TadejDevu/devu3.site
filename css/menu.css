@@ -9,8 +9,8 @@
   --color-accent: #00bcd4;
 
   /*velikost knofa c meniju*/
-  --menu-width: 120px;
-  --header-height: 40px;
+  --menu-width: 80px;
+  --header-height: 20px;
 
   --radius: 6px;
   --shadow: 2px 0 10px rgba(0, 0, 0, 0.5);
@@ -18,7 +18,7 @@
   --t-fast: 0.2s;
   --t-med: 0.3s;
 
-  --touch-min: 44px;
+  --touch-min: 20px;
 
   /* ključ za enake razmake */
   --menu-gap: 10px;
