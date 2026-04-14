@@ -9,7 +9,7 @@
   --color-accent: #00bcd4;
 
   /*velikost knofa c meniju*/
-  --menu-width: 80px;
+  --menu-width: 150px;
   --header-height: 20px;
 
   --radius: 6px;
@@ -21,7 +21,7 @@
   --touch-min: 20px;
 
   /* ključ za enake razmake */
-  --menu-gap: 10px;
+  --menu-gap: 5px;
 }
 
 /* ---------- Burger (mobile) ---------- */
