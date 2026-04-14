@@ -8,8 +8,9 @@
   --color-muted: #c9c9c9;
   --color-accent: #00bcd4;
 
-  --menu-width: 220px;
-  --header-height: 60px;
+  /*velikost knofa c meniju*/
+  --menu-width: 120px;
+  --header-height: 40px;
 
   --radius: 6px;
   --shadow: 2px 0 10px rgba(0, 0, 0, 0.5);
