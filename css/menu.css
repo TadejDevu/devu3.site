@@ -109,6 +109,7 @@
   background: var(--color-panel);
   color: var(--color-text);
   font: inherit;
+  font-size: 12;
   line-height: 1.2;
 
   display: flex;
